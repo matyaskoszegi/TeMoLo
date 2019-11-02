@@ -1,0 +1,94 @@
+# App von Mátyás Kőszegi, entwickelt für DLL Modul 3
+ 
+from tkinter import *
+from tkinter import messagebox
+import random
+ 
+# Hauptfenster
+main = Tk()
+main.title("Reihenfolge der Satzglieder - App von Mátyás Kőszegi")
+main.geometry('800x600')
+ 
+# Anweisung
+text = Label(main, text="Bilden Sie Sätze. Achten Sie auf die Reihenfolge der Elemente.", font = ('Garamond', 20))
+text.place(x=50,y=30)
+ 
+# Satzanfang
+text2 = Label(main, text="Ich möchte", font = ('Garamond', 18))
+text2.place(x=10, y=200)
+ 
+# Entry boxes
+Temporal = Entry(main)
+Temporal.place(x=150,y=210)
+Modal = Entry(main)
+Modal.place(x=350,y=210)
+Lokal = Entry(main)
+Lokal.place(x=550,y=210)
+ 
+# Satzende
+text3 = Label(main, text="fahren.", font = ('Garamond', 18))
+text3.place(x=700,y=200)
+ 
+# Wortlisten
+ZeitListe=['am Montag','morgen','jeden Abend','um 15 Uhr','heute','in zwei Wochen','in der Früh','am Wochenende','einmal pro Tag','nie','oft','manchmal','jedes Jahr','2025','in der Nacht']
+ModalListe=['sehr schnell','mit Mama','ohne dich','mit dem Zug','mit dir','zu Fuß','mit Paul','langsam','ruhig','mit Maria','singend']
+OrtListe=['nach London','ans Meer','zum Bäcker','auf eine Insel','in die Stadt','nach Deutschland','nach Hause','zum Park','in die Schweiz','zur Uni','in die Alpen','in den Wald']
+ 
+# Listen für Positionierung
+TemporalPlatzX = [250,625]
+TemporalplatzY = [450, 490, 530, 570]
+ 
+ModalPlatzX = [1,375]
+ModalPlatzY = [450, 490, 530, 570]
+ 
+LokalPlatzX = [125,500]
+LokalPlatzY = [450, 490, 530, 570]
+ 
+# Anfangsposition
+Zeit = Label(main, text=random.choice(ZeitListe), font = ('Garamond', 16))
+Zeit.place(x=random.choice(TemporalPlatzX), y=random.choice(TemporalplatzY))
+Methode = Label(main, text=random.choice(ModalListe), font = ('Garamond', 16))
+Methode.place(x=random.choice(ModalPlatzX), y=random.choice(ModalPlatzY))
+Ort = Label(main, text=random.choice(OrtListe), font = ('Garamond', 16))
+Ort.place(x=random.choice(LokalPlatzX), y=random.choice(LokalPlatzY))
+ 
+# Funktionen
+def NeueWoerter():
+    Zeit.configure(text=random.choice(ZeitListe), font = ('Garamond', 16))
+    Zeit.place(x=random.choice(TemporalPlatzX), y=random.choice(TemporalplatzY))
+ 
+    Methode.configure(text=random.choice(ModalListe), font=('Garamond', 16))
+    Methode.place(x=random.choice(ModalPlatzX), y=random.choice(ModalPlatzY))
+ 
+    Ort.configure(text=random.choice(OrtListe), font=('Garamond', 16))
+    Ort.place(x=random.choice(LokalPlatzX), y=random.choice(LokalPlatzY))
+ 
+def Loeschen():
+    Zeit.place_forget()
+    Methode.place_forget()
+    Ort.place_forget()
+ 
+def Ueber():
+    if Temporal.get() in ZeitListe and Modal.get() in ModalListe and Lokal.get() in OrtListe:
+        messagebox.showinfo("Antwort","Richtig!")
+    else:
+        messagebox.showinfo("Antwort", "Leider falsch.")
+ 
+def Beenden():
+    main.destroy()
+ 
+# Buttons
+button = Button(main, text='Überprüfen', width=25, command=Ueber)
+button.place(x=300,y=300)
+ 
+button2 = Button(main, text='Wörter löschen', width=25, command=Loeschen)
+button2.place(x=300,y=340),
+ 
+button3 = Button(main, text='Neue Wörter', width=25, command=NeueWoerter)
+button3.place(x=300,y=380)
+ 
+button4 = Button(main, text='Beenden', width =25, command=Beenden)
+button4.place(x=300, y=420)
+ 
+ 
+main.mainloop()
